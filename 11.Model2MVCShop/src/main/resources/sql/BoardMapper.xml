@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="BoardMapper">
+	
+	 <resultMap id="boardSelectMap" type="board">
+		<result property="boardNo" 			column="board_no" 		jdbcType="NUMERIC"/>
+		<result property="userId"			column="user_id" 		jdbcType="VARCHAR" />
+		<result property="boardName"		column="board_name" 	jdbcType="VARCHAR" />
+		<result property="boardDetail" 		column="board_detail" 	jdbcType="VARCHAR" />
+		<result property="regDate" 			column="reg_Date" 		jdbcType="DATE" />
+	</resultMap>
+	 
+	<select id="getBoard" parameterType="int" resultMap="boardSelectMap">
+		SELECT
+		board_no,
+		user_id,
+		board_name,
+		board_detail,
+		reg_date
+		FROM board
+		WHERE board_no in (#{value})
+	</select>
+
+	<select id="getBoardList" parameterType="search" resultMap="boardSelectMap">
+		SELECT
+		*
+		FROM ( SELECT
+				inner_table.* , ROWNUM AS row_seq
+				FROM ( SELECT
+						board_no,
+						user_id,
+						board_name,
+						board_detail,
+						reg_date
+						FROM board
+						<if test=" searchCondition != null">
+							<where>
+								<choose>
+									<when test=" searchCondition == 0 and searchKeyword != '' ">
+										board_name like '%${searchKeyword}%' OR board_detail like '%${searchKeyword}%'
+									</when>
+									<when test=" searchCondition == 1 and searchKeyword != '' ">
+										board_name like '%${searchKeyword}%'
+									</when>
+									<when test=" searchCondition == 2 and searchKeyword != '' ">
+										user_id like '%${searchKeyword}%'
+									</when>
+								</choose>
+							</where>
+						</if>
+				ORDER BY board_no DESC) inner_table
+			WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	</select>
+	
+	<insert id="addBoard" parameterType="board">
+		INSERT
+		INTO board
+		VALUES ( seq_board_board_no.nextval , 
+				#{userId},
+				#{boardName},
+				#{boardDetail:VARCHAR},
+				sysdate )		
+	</insert>
+	
+	<update id="updateBoard" parameterType="board">
+		UPDATE
+		board
+		SET board_name = #{boardName},
+			board_detail = #{boardDetail:VARCHAR},
+			reg_date = sysdate
+		WHERE board_no in (#{boardNo})
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int" >
+		DELETE
+		FROM board
+		WHERE board_no IN (#{value})
+	</delete>
+	
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM (SELECT
+				*
+				FROM board
+				<if test=" searchCondition != null">
+					<where>
+						<choose>
+							<when test=" searchCondition == 0 and searchKeyword != '' ">
+								board_name like '%${searchKeyword}%' OR board_detail like '%${searchKeyword}%'
+							</when>
+							<when test=" searchCondition == 1 and searchKeyword != '' ">
+								board_name like '%${searchKeyword}%'
+							</when>
+							<when test=" searchCondition == 2 and searchKeyword != '' ">
+								user_id like '%${searchKeyword}%'
+							</when>
+						</choose>						
+					</where>
+				</if>
+				ORDER BY board_no) countTable
+	</select>
+	 
+	
+</mapper>
