@@ -67,26 +67,26 @@
 					'/product/deleteProduct').submit();
 		}
 	}
-	
-	$(function(){
-		
-		$('button:contains("수 정")').on('click', function(){
-			
+
+	$(function() {
+
+		$('button:contains("수 정")').on('click', function() {
+
 			fncUpdateProduct();
 		})
-		
-		$('a[role="button"]:contains("삭 제")').on('click', function(){
-			
+
+		$('a[role="button"]:contains("삭 제")').on('click', function() {
+
 			fncDeleteProduct();
 		})
-		
-		$('a[role="button"]:contains("취 소")').on('click', function(){
-			
+
+		$('a[role="button"]:contains("취 소")').on('click', function() {
+
 			$('form')[0].reset();
 		})
 	})
-	
-		// jQuery 달력
+
+	// jQuery 달력
 	$(function() {
 		$("#datepicker").datepicker({
 			dateFormat : 'yy-mm-dd'
@@ -115,7 +115,7 @@ body>div.container {
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
-			<input type="hidden" name="prodNo" value="${product.prodNo }"/>
+			<input type="hidden" name="prodNo" value="${product.prodNo }" />
 			<div class="form-group">
 				<label for="userId" class="col-sm-offset-1 col-sm-3 control-label">상품이름</label>
 				<div class="col-sm-4">
@@ -144,7 +144,7 @@ body>div.container {
 				<label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">상품정보</label>
 				<div class="col-sm-4">
 					<textarea class="form-control col-sm-5" rows="5" name="prodDetail"
-						value="${product.prodDetail }" style="resize: none;"></textarea>
+						style="resize: none;">${product.prodDetail }</textarea>
 				</div>
 			</div>
 
@@ -159,8 +159,8 @@ body>div.container {
 			<div class="form-group">
 				<div class="col-sm-offset-4  col-sm-4 text-center">
 					<button class="btn btn-default">수 정</button>
-					<a class="btn btn-default btn" href="#" role="button">삭 제</a> 
-					<a class="btn btn-default btn" href="#" role="button">취 소</a>
+					<a class="btn btn-default btn" href="#" role="button">삭 제</a> <a
+						class="btn btn-default btn" href="#" role="button">취 소</a>
 				</div>
 			</div>
 		</form>

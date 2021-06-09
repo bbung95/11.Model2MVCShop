@@ -31,6 +31,8 @@
 <!-- Bootstrap Dropdown Hover JS -->
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 <script>
+
+	// 메인화면 스크롤
 	$(function() {
 
 		var loading = false;
@@ -63,7 +65,8 @@
 						contentType : "application/json; charset=utf-8",
 						dataType : "JSON",
 						success : function(data, status) {
-
+							
+							// 상품전체 출력시 1페이지로 다시 초기화
 							if ((Math.round(data.totalCount / 6)) == page) {
 								page = 1;
 							}
@@ -75,17 +78,11 @@
 
 							for (var i = 0; i < data.list.length; i++) {
 								
-								let fileName = "";
-								if (list[i].fileName == "" || list[i].fileName == null) {
-									fileName = "src='http://placehole.it/252X200'";
-								}else{
-									fileName = "src=/images/uploadFiles/"+list[i].fileName;
-								}
-
-								//placehole.it/50X50
+								let fileArry = list[i].fileName.split("/");
+								
 								let displayValue = "<div class='col-xs-4 .col-md-4'>"
-										+ "<div class='thumbnail'>"
-										+ "<img src='/images/uploadFiles/"+list[i].fileName+"' alt=''>"
+										+ "<div class='thumbnail' onclick='javascript:fncGetProduct("+list[i].prodNo+")'>"
+										+ "<img src='/images/uploadFiles/"+fileArry[0]+"' alt=''>"
 										+ "<div class='caption'>"
 										+ "<h3>"
 										+ list[i].prodName
@@ -101,12 +98,26 @@
 							loading = false;
 							page++;
 
-							// product 전부 로딩시 다시 초기화
 						}
 					});
 		}
 		mainProduct();
 	});
+	
+	function fncGetProduct(prodNo){
+		
+		location.href = "/product/getProduct?prodNo="+prodNo;
+	}
+	
+	// 셀렉터  (ajax적용 x)
+	/* $(function(){
+		
+		$('#enters').children('.thumbnail').on('click',function(){
+			alert("asda");
+			let prodNo = $(this).attr('prodno');
+			location.href = "/product/getProduct?prodNo="+prodNo;
+		});
+	}); */
 </script>
 <!--  CSS 추가 : 툴바에 화면 가리는 현상 해결 :  주석처리 전, 후 확인-->
 <style>

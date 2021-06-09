@@ -29,7 +29,7 @@
 		let prodNo = $('strong:contains("상품번호")').parent().next().text();
 
 		$('button:contains("수정")').on('click', function() {
-
+			
 			location.href = "/product/updateProduct?prodNo=" + prodNo;
 		})
 

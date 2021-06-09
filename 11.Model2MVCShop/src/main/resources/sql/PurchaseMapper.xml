@@ -41,8 +41,7 @@
 	<update id="updatePurchase" parameterType="purchase">
 		UPDATE
 		transaction
-		SET payment_option = #{paymentOption:CHAR} ,
-			receiver_name = #{receiverName:VARCHAR} , 
+		SET receiver_name = #{receiverName:VARCHAR} , 
 			receiver_phone = #{receiverPhone:VARCHAR} , 
 			demailaddr = #{divyAddr:VARCHAR} , 
 			dlvy_request = #{divyRequest:VARCHAR} , 

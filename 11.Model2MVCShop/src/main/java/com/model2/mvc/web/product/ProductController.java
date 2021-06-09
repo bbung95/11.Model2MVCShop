@@ -81,7 +81,7 @@ public class ProductController {
 			String fileName = fileUpload(product.getFile());
 			product.setFileName(fileName);
 		}else {
-			product.setFileName(null);
+			product.setFileName("Placeholder.png");
 		}
 		productService.addProduct(product);
 
@@ -100,8 +100,7 @@ public class ProductController {
 		
 // 		Cookie History (Spring frameWork 사용)
 		CookieGenerator cookie = new CookieGenerator();
-		cookie.setCookieMaxAge(-1);
-		
+		cookie.setCookieMaxAge(5);
 		history = history + "," + product.getProdNo() + "/" + product.getProdName();
 		
 		cookie.setCookieName("history");
@@ -145,10 +144,14 @@ public class ProductController {
 	public String updateProduct(@ModelAttribute("product") Product product) throws Exception {
 
 		System.out.println("/product/updateProduct :: POST");
+		
 		// Business Logic
 		if(product.getFile() != null) {
 			String fileName = fileUpload(product.getFile());
 			product.setFileName(fileName);
+			System.out.println("파일업로드");
+		}else {
+			product.setFileName("Placeholder.png");
 		}
 		
 		productService.updateProduct(product);
