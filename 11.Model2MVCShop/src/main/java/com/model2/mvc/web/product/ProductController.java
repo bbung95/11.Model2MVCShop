@@ -207,7 +207,7 @@ public class ProductController {
 				fileName += file.getOriginalFilename()+"/";
 				try {
 					//File file2 = new File("/images/uploadFiles/"+fileName);
-					File file2 = new File("/Volumes/Macintosh HD - ตฅภฬลอ/workspace/11.Model2MVCShop/src/main/webapp/images/uploadFiles/"+fileName);
+					File file2 = new File("/Users/bbung_/git/11.Model2MVCShop/11.Model2MVCShop/src/main/webapp/images/uploadFiles/"+fileName);
 					file.transferTo(file2);
 				}catch (Exception e) {
 					e.printStackTrace();

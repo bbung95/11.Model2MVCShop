@@ -80,9 +80,9 @@
 								
 								let fileArry = list[i].fileName.split("/");
 								
-								let displayValue = "<div class='col-xs-4 .col-md-4'>"
+								let displayValue = "<div class='col-sm-6 col-md-4'>"
 										+ "<div class='thumbnail' onclick='javascript:fncGetProduct("+list[i].prodNo+")'>"
-										+ "<img src='/images/uploadFiles/"+fileArry[0]+"' alt=''>"
+										+ "<img src='/images/uploadFiles/"+fileArry[0]+"' alt='' style='height: 300px;'>"
 										+ "<div class='caption'>"
 										+ "<h3>"
 										+ list[i].prodName
@@ -129,10 +129,6 @@ body {
 	margin: auto;
 }
 
-img {
-	width: :252px;
-	height: 200px
-}
 </style>
 
 </head>

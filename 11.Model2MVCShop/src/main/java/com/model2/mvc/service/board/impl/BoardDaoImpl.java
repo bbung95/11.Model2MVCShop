@@ -52,7 +52,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	public void deleteBoard(int boardNo) {
 		
-		sqlSession.selectOne("BoardMapper.deleteBoard",boardNo);
+		sqlSession.delete("BoardMapper.deleteBoard",boardNo);
 	}
 	
 	public int getTotalCount(Search search) throws Exception {

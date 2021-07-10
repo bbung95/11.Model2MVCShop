@@ -21,6 +21,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 body>div.container {
@@ -55,11 +56,12 @@ body>div.container {
 
 			$("form").attr("method", "POST").attr("action", "/user/login")
 					.attr("target", "parent").submit();
+			window.close();
 			
 		};
 
 		$("button").on("click", function() {
-			login
+			login();
 		});
 
 		$("input").keydown(function(key) {

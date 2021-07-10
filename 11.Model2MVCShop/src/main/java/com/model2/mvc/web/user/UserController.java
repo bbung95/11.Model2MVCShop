@@ -173,4 +173,9 @@ public class UserController {
 		
 		return "forward:/user/listUser.jsp";
 	}
+	
+	@RequestMapping (value="createRoom")
+	public String createRoom() {
+		return null;
+	}
 }

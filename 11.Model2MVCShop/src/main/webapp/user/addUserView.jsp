@@ -18,6 +18,9 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
+	<!-- 다음주소 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
@@ -221,7 +224,8 @@
 		  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr" placeholder="주소">
+		      <input type="text" class="form-control" id="addrFull" name="addr" placeholder="주소">
+		       <input type="hidden" class="form-control" id="addr" name="addr" placeholder="주소">
 		    </div>
 		  </div>
 		  
@@ -263,7 +267,20 @@
 		
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
+	<script>
 	
+$('#addrFull').on('click', ()=>{
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            alert(data.bname)
+             $('#addrFull').val(data.address);
+            $('#addr').val(data.bname);
+        }
+    }).open();
+})
+</script>
 </body>
 
 </html>

@@ -87,7 +87,7 @@
 				<ul class="nav navbar-nav navbar-right">
 
 					<c:if test="${!empty sessionScope.user}">
-
+						<li><a href="#">채 팅</a></li>
 						<li><a href="#">로그아웃</a></li>
 					</c:if>
 					<c:if test="${empty sessionScope.user}">
@@ -156,6 +156,16 @@
 				"/user/loginView.jsp",
 				"popWin",
 				"left=460, top=300, width=460, height=300, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+	});
+	
+	$("a:contains('채 팅')").on("click", function() {
+
+		//location.href = "/user/loginView.jsp";
+		popWin = window
+		.open(
+				"http://localhost:3000/",
+				"popWin",
+				"left=460, top=300, width=460, height=600, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 	});
 	
 	$("a:contains('상 품 검 색')").on("click", function() {
